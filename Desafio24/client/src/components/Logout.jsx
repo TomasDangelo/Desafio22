@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react'
+import { Link } from 'react-router-dom'
 
-const App = () => {
+const Logout = () => {
   const [backendData, setBackendData] = useState([{}])
 
   useEffect(() =>{
-     fetch("/login")
+     fetch("/logout")
     .then(response => response.json())
     .then(data => {setBackendData(data)})
     .catch(err => {console.log(err)})
@@ -12,7 +13,7 @@ const App = () => {
   }, [])
 
   return (
-    <div>
+    <div style={{display: 'none'}}>
         {(typeof backendData.messages === 'undefined'? (
           <p>Cargando...</p>
         ) : (
@@ -20,7 +21,7 @@ const App = () => {
             <div className='container_user'>
               <div className='container_inner'>
               <p className='user' key={i}>{user}</p>
-              <button className='buttonUser'>Desloguear</button>
+              <Link key={i} to="/login" className='buttonUser'>Volver a inicio</Link>
               </div>
             </div>
           )))
@@ -28,5 +29,4 @@ const App = () => {
     </div>
   )
 }
-
-export default App
+export default Logout

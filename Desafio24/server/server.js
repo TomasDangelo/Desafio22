@@ -1,26 +1,24 @@
 import express from 'express';
-import cookieParser from 'cookie-parser';
 import session from 'express-session'
 import MongoStore from 'connect-mongo'
-//----------------------------------------------------------------/
-//---------------Configuraciones generales de server
+//------------------------Configuraciones generales de server----------------------------------------/
 const app = express();
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
+
+const advancedOptions = { useNewUrlParser: true, useUnifiedTopology: true}
 
 //---------------Endpoints: login y logout
 
 app.use(session({  //Creamos la session con Mongo de forma local
-    store: MongoStore.create({mongoUrl: 'mongodb://localhost/sesiones'}),
+    store: MongoStore.create({mongoUrl: 'mongodb://localhost/sesiones' , mongoOptions: advancedOptions}),
     secret: 'secretData',
     resave: false,
     saveUninitialized: false,
-    cookie: {maxAge: 10000}
+    cookie: {maxAge: 60000}
 }))
 
 app.get('/login' , (req, res) => {
 const {username, password} = req.query;
-// if (username !== "Pepe" || password !== "pepePass"){res.json({"messages": ["Error validando tu usuario"]})}
+if (username !== "Pepe" || password !== "pepePass"){res.json({"messages": ["Error validando tu usuario"]})}
 
 req.session.user = username
 req.session.admin = true;
@@ -29,7 +27,7 @@ res.json({"messages": [`Bienvenido ${username}`]})
 
 app.get('/logout' , (req, res) => {
     req.session.destroy(err => {
-     err? res.json({messages: ['Error en el logout']}) : res.send('Hasta luego!!')
+     err? res.json({messages: ['Error en el logout']}) : res.json({messages: ['Hasta luego!!']})
     })
 })
 

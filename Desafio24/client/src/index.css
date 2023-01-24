@@ -1,10 +1,5 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 .container_user{
@@ -15,6 +10,10 @@ body {
 
 .user{
   font-size: 2rem;
+}
+
+.dontshow{
+  display: none;
 }
 
 .buttonUser{
@@ -29,4 +28,22 @@ body {
   gap: 2rem;
   width: 50rem;
   background-color: azure;
+}
+
+.form-usuario{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: dodgerblue;
+}
+
+.container-form{
+  gap: 2rem;
+  font-size: 20px ;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
